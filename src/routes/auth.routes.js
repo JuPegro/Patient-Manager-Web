@@ -11,6 +11,6 @@ router.post("/signin", authController.SignIn);
 router.post("/signup", authController.SignUp);
 
 // ⚡ VIEW PROFILE USER [AUTH] ⚡
-router.get("/me", authController.SignIn);
+router.get("/profile", authController.verifyToken, authController.Profile);
 
 module.exports = router;

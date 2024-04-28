@@ -83,3 +83,25 @@ exports.SignUp = async (req, res, next) => {
 
   res.json({ message: "Successfully Created User", user });
 };
+
+// --------------------------------------------------!
+
+// ⚡ MIDDLEWARE PROTECTED ROUTES AUTHORIZED ⚡
+exports.verifyToken = async (req, res, next) => {
+    const token = req.headers['authorization'];
+    if (!token) {
+        return res.status(403).json({ message: 'Token not provided' });
+    }
+
+    jwt.verify(token, secretKey, (err, decoded) => {
+        if (err) {
+            return res.status(401).json({ message: 'Invalid Token' });
+        }
+        req.id = decoded.id;
+        next();
+    });
+}
+
+exports.Profile = async (req, res, next) => {
+    // WORKING THIS MIDDLEWARE.....
+}
