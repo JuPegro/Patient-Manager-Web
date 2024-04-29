@@ -5,7 +5,7 @@ const { PrismaClient } = require("@prisma/client");
 
 const prisma = new PrismaClient();
 
-// MIDDLEWARE FOR LOGIN USER
+// ENVIROMENT VARIABLES
 const secretKey = process.env.JWT_SECRET_KEY;
 const expireKey = process.env.EXPIRE_IN_TOKEN;
 const saltRounds = process.env.SALT;
