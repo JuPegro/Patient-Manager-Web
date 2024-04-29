@@ -130,3 +130,30 @@ exports.deleteUser = async (req, res, next) => {
     return res.status(500).json({ error: "Internal server error" });
   }
 };
+
+// MIDDLEWARE FOR CREATE A NEW USER
+exports.createUser = async (req, res, next) => {
+  const { name, lastname, username, email, password, picture } = req.body;
+
+  // EMPTY FIELDS
+  if (!name || !lastname || !username || !email || !password || !picture) {
+    return res.status(422).json({ message: "Empty Fields" });
+  }
+
+  // FOUND AN EXISTING USER WITH THE SAME USERNAME OR EMAIL
+  const existingUser = await prisma.user.findFirst({
+    where: {
+      OR: [{ username: username }, { email: email }],
+    },
+  });
+
+  // IF EXISTS RETURN ERROR
+  if (existingUser) {
+    if (existingUser.username === username) {
+      return res.status(401).json({ message: "Username already in use" });
+    }
+    if (existingUser.email === email) {
+      return res.status(401).json({ message: "Email already in use" });
+    }
+  }
+}

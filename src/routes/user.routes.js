@@ -9,6 +9,8 @@ const authController = require('../controller/authController');
 
 router.get('/users', authController.verifyToken, userController.getAllUser); // GET ALL USERS
 
+router.post('/users', authController.verifyToken, userController.createUser); // CREATE USERS
+
 router.get('/users/:id', authController.verifyToken, userController.getUserById); // GET AN USER
 
 router.put('/users/:id', authController.verifyToken, userController.updateUser); // UPDATE AN USER
