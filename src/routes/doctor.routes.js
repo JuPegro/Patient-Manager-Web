@@ -15,7 +15,7 @@ router.get('/doctors/:id', authController.verifyToken, doctorController.getDocto
 
 router.put('/doctors/:id', authController.verifyToken, doctorController.updateDoctor) // UPDATE A DOCTOR
 
-
+router.delete('/doctors/:id', authController.verifyToken, doctorController.deleteDoctor) // DELETE A DOCTOR
 
 
 module.exports = router;
