@@ -7,35 +7,34 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 // ⚡ TABLE USERS ⚡
 model User {
-  id          String    @id @default(uuid())
-  name        String 
-  lastname    String
-  email       String    @unique
-  username    String    @unique
-  password    String
-  picture     String?       
-  role        Role      @default(ASSISTANT)
-  status      Status    @default(ACTIVE)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime?  @updatedAt
+  id        String    @id @default(uuid())
+  name      String
+  lastname  String
+  email     String    @unique
+  username  String    @unique
+  password  String
+  picture   String?
+  role      Role      @default(ASSISTANT)
+  status    Status    @default(ACTIVE)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
 }
 
 // ⚡ TABLE DOCTORS ⚡
 model Doctor {
-  id          String    @id @default(uuid())
-  name        String 
-  lastname    String
-  email       String    @unique
-  phone       String    @unique
-  card        String    @unique
-  picture     String?       
-  specialty   Specialty      @default(GENERAL)
-  status      Status    @default(ACTIVE)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime?  @updatedAt
+  id        String    @id @default(uuid())
+  name      String
+  lastname  String
+  email     String    @unique
+  phone     String    @unique
+  card      String    @unique
+  picture   String?
+  specialty Specialty @default(GENERAL)
+  status    Status    @default(ACTIVE)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
 }
 
 // ⚡ ENUMS PROPERTYS ⚡
