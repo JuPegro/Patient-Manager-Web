@@ -156,4 +156,20 @@ exports.createUser = async (req, res, next) => {
       return res.status(401).json({ message: "Email already in use" });
     }
   }
+
+  // ENCRYPT PASSWORD
+  const hashedPassword = await bcrypt.hash(password, parseInt(saltRounds));
+
+  const user = await prisma.user.create({
+    data: {
+      name: name,
+      email: email,
+      lastname: lastname,
+      password: hashedPassword,
+      username: username,
+      picture: picture,
+    },
+  });
+
+  res.json({ message: "Successfully Created User", user });
 }
