@@ -11,6 +11,8 @@ router.get('/doctors', authController.verifyToken, doctorController.getAllDoctor
 
 router.post('/doctors', authController.verifyToken, doctorController.createDoctor) // GET A DOCTOR
 
+router.get('/doctors/:id', authController.verifyToken, doctorController.getDoctorById) // GET BY ID DOCTOR
+
 
 
 module.exports = router;

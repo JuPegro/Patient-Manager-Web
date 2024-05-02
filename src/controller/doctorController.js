@@ -62,3 +62,27 @@ exports.createDoctor = async (req, res, next) => {
     res.json({ message: "Successfully Created Doctor", doctor });
   } catch (err) {}
 };
+
+// MIDDLEWARE GET DOCTOR BY ID
+exports.getDoctorById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    if (!id) {
+      return res.status(403).json({ message: "Id not provided" });
+    }
+
+    const doctor = await prisma.doctor.findFirst({ where: { id } });
+
+    if (!doctor) {
+      return res.status(404).json({ message: "Doctor not Found" });
+    }
+
+    return res
+      .status(200)
+      .json({ message: "Doctor found successfully", doctor });
+  } catch (err) {
+    console.error("Error fetching doctor:", err);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+};
