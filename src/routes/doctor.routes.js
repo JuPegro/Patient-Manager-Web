@@ -13,6 +13,9 @@ router.post('/doctors', authController.verifyToken, doctorController.createDocto
 
 router.get('/doctors/:id', authController.verifyToken, doctorController.getDoctorById) // GET BY ID DOCTOR
 
+router.put('/doctors/:id', authController.verifyToken, doctorController.updateDoctor) // UPDATE A DOCTOR
+
+
 
 
 module.exports = router;
