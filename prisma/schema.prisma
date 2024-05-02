@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -12,6 +6,7 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
 
 // ⚡ TABLE USERS ⚡
 model User {
@@ -28,11 +23,31 @@ model User {
   updatedAt   DateTime?  @updatedAt
 }
 
+// ⚡ TABLE DOCTORS ⚡
+model Doctor {
+  id          String    @id @default(uuid())
+  name        String 
+  lastname    String
+  email       String    @unique
+  phone       String    @unique
+  card        String    @unique
+  picture     String?       
+  specialty   Specialty      @default(GENERAL)
+  status      Status    @default(ACTIVE)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime?  @updatedAt
+}
+
 // ⚡ ENUMS PROPERTYS ⚡
 
 enum Role {
   ASSISTANT
   ADMIN
+}
+
+enum Specialty {
+  NURSE
+  GENERAL
 }
 
 enum Status {
