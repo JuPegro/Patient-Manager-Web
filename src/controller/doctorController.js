@@ -165,7 +165,7 @@ exports.deleteDoctor = async (req, res, next) => {
         const doctor = await prisma.doctor.delete({ where: { id } });
     
         if (!doctor) {
-          return res.status(404).json({ message: "User not Found!!" });
+          return res.status(404).json({ message: "Doctor not Found!!" });
         }
     
         return res

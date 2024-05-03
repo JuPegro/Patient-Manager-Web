@@ -16,5 +16,6 @@ router.get('/tests/:id', authController.verifyToken, testController.getTestById)
 
 router.put('/tests/:id', authController.verifyToken, testController.UpdateTest); // UPDATE A TEST
 
+router.delete('/tests/:id', authController.verifyToken, testController.deleteTest); // DELETE A TEST
 
 module.exports = router;

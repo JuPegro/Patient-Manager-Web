@@ -75,6 +75,7 @@ exports.getTestById = async (req, res, next) => {
   }
 };
 
+// MIDDLEWARE UPDATE A TEST
 exports.UpdateTest = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -114,6 +115,30 @@ exports.UpdateTest = async (req, res, next) => {
     return res.status(200).json({ message: "Update test successfully", test });
   } catch (err) {
     console.log({ error: "Error fetching Tests:", err });
+    return res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+// MIDDLEWARE DELETE A TEST
+exports.deleteTest = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    if (!id) {
+      return res.status(401).json({ message: "Id not provided!" });
+    }
+
+    const test = await prisma.test.delete({ where: { id } });
+
+    if (!test) {
+      return res.status(404).json({ message: "Test not Found!!" });
+    }
+
+    return res
+      .status(200)
+      .json({ message: "Test deleted successfully", test });
+  } catch (err) {
+    console.log({ error: "Error deleted Tests:", err });
     return res.status(500).json({ error: "Internal server error" });
   }
 };
