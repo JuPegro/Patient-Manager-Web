@@ -14,4 +14,7 @@ router.post('/tests', authController.verifyToken, testController.createTest); //
 
 router.get('/tests/:id', authController.verifyToken, testController.getTestById); // GET A TEST BY ID
 
+router.put('/tests/:id', authController.verifyToken, testController.UpdateTest); // UPDATE A TEST
+
+
 module.exports = router;
