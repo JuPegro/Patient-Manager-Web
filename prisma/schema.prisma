@@ -37,6 +37,15 @@ model Doctor {
   updatedAt DateTime? @updatedAt
 }
 
+// ⚡ TABLE TEST ⚡
+model Test {
+  id        String    @id @default(uuid())
+  name      String    @unique
+  status    Status    @default(ACTIVE)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+}
+
 // ⚡ ENUMS PROPERTYS ⚡
 
 enum Role {
