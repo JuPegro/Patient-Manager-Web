@@ -10,6 +10,7 @@ const testController = require('../controller/testController');
 
 router.get('/tests', authController.verifyToken, testController.getAllTets); // GET ALL TEST
 
+router.post('/tests', authController.verifyToken, testController.createTest); // CREATE A TEST
 
 
 module.exports = router;
