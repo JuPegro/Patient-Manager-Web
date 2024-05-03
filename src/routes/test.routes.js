@@ -12,5 +12,6 @@ router.get('/tests', authController.verifyToken, testController.getAllTets); // 
 
 router.post('/tests', authController.verifyToken, testController.createTest); // CREATE A TEST
 
+router.get('/tests/:id', authController.verifyToken, testController.getTestById); // GET A TEST BY ID
 
 module.exports = router;
