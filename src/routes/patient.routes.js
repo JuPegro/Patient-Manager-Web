@@ -15,5 +15,7 @@ router.put('/patients/:id', authController.verifyToken, patientController.update
 
 router.get('/patients/:id', authController.verifyToken, patientController.getPatientById); // GET BY ID A PATIENT
 
+router.delete('/patients/:id', authController.verifyToken, patientController.deletePatient); // DELETE A PATIENT
+
 
 module.exports = router;

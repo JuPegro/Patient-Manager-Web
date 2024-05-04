@@ -184,3 +184,27 @@ exports.getPatientById = async (req, res, next) => {
     return res.status(500).json({ message: "Internal server error" });
   }
 };
+
+// MIDDLEWARE DELETE A PATIENT
+exports.deletePatient = async (req,res,next) => {
+    try {
+        const { id } = req.params;
+    
+        // IF DONT PROVIDED ID
+        if (!id) {
+          return res.status(401).json({ message: "Id not provided" });
+        }
+    
+        const patient = await prisma.patient.delete({ where: { id } });
+    
+        // IF NOT FOUND 
+        if(!patient) {
+            return res.status(404).json({ message: "Patient not Found!" });
+        }
+    
+        return res.status(200).json({ message: "Successfully delete Patient", patient });
+      } catch (err) {
+        console.log({ error: "error fetching Patients" });
+        return res.status(500).json({ message: "Internal server error" });
+      }
+}
