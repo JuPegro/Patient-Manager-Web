@@ -25,8 +25,8 @@ exports.createPatient = async (req, res, next) => {
     const {name, lastname, phone, address, card, birthday, picture, smoke, allergies} = req.body
 
     // EMPTY FIELDS
-    if(!name || !lastname || !phone || !address || !card || !birthday || !picture || !smoke || !allergies){
-        return res.status(401).json({message: "Empty Fields!"})
+    if(!name || !lastname || !phone || !address || !card || !birthday || !picture || typeof smoke === 'undefined' || typeof allergies === 'undefined'){
+        return res.status(401).json({message: "Empty Fields!", name, lastname, phone,address, card, birthday, picture, smoke, allergies})
     }
 
     // FOUND AN EXISTING PATIENT WITH THE SAME PHONE OR CARD
