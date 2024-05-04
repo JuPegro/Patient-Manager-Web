@@ -160,3 +160,27 @@ exports.updatePatient = async (req, res, next) => {
     return res.status(500).json({ message: "Internal server error", err });
   }
 };
+
+// MIDDLEWARE GET BY ID PATIENT
+exports.getPatientById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    // IF DONT PROVIDED ID
+    if (!id) {
+      return res.status(401).json({ message: "Id not provided" });
+    }
+
+    const patient = await prisma.patient.findUnique({ where: { id } });
+
+    // IF NOT FOUND 
+    if(!patient) {
+        return res.status(404).json({ message: "Patient not Found!" });
+    }
+
+    return res.status(200).json({ message: "Successfully Found Patient", patient });
+  } catch (err) {
+    console.log({ error: "error fetching Patients" });
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};

@@ -13,4 +13,7 @@ router.post('/patients', authController.verifyToken, patientController.createPat
 
 router.put('/patients/:id', authController.verifyToken, patientController.updatePatient); // UPDATE A PATIENT
 
+router.get('/patients/:id', authController.verifyToken, patientController.getPatientById); // GET BY ID A PATIENT
+
+
 module.exports = router;
