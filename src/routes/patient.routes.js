@@ -9,5 +9,6 @@ const patientController = require('../controller/patientController');
 
 router.get('/patients', authController.verifyToken, patientController.getAllPatient); // GET ALL PATIENT
 
+router.post('/patients', authController.verifyToken, patientController.createPatient); // CREATE A PATIENT
 
 module.exports = router;

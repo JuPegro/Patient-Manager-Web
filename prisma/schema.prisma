@@ -54,7 +54,7 @@ model Patient {
   phone     String    @unique
   address   String
   card      String    @unique
-  birthday  DateTime
+  birthday  String
   picture   String
   smoke     Boolean
   allergies Boolean
