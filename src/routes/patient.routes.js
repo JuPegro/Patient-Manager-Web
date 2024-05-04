@@ -11,4 +11,6 @@ router.get('/patients', authController.verifyToken, patientController.getAllPati
 
 router.post('/patients', authController.verifyToken, patientController.createPatient); // CREATE A PATIENT
 
+router.put('/patients/:id', authController.verifyToken, patientController.updatePatient); // UPDATE A PATIENT
+
 module.exports = router;
