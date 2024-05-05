@@ -9,8 +9,8 @@ dotenv.config();
 const authRoutes = require("./routes/auth.routes");
 const userRoutes = require("./routes/user.routes");
 const testRoutes = require("./routes/test.routes");
-const patientRoutes = require("./routes/patient.routes");
 const doctorRoutes = require("./routes/doctor.routes");
+const patientRoutes = require("./routes/patient.routes");
 
 // ⚡ SERVER READ FILES JSON ⚡
 app.use(express.json());
@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/auth", authRoutes);
 app.use(userRoutes);
 app.use(testRoutes);
-app.use(patientRoutes);
 app.use(doctorRoutes);
+app.use(patientRoutes);
 
 module.exports = app;

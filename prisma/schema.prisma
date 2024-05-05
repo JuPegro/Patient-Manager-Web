@@ -61,10 +61,29 @@ model Patient {
   status    Status    @default(ACTIVE)
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
+  result    Result[]
+}
+
+// ⚡ TABLE RESULT ⚡
+model Result {
+  id            String      @id @default(uuid())
+  diagnostic    String?
+  patient       Patient     @relation(fields: [patientId], references: [id])
+  patientId     String      @unique
+  appointment   Appointment @relation(fields: [appointmentId], references: [id])
+  appointmentId String      @unique
+  status        Progress    @default(INCOMPLETE)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime?   @updatedAt
+}
+
+// ⚡ TABLE APPOINTMENT ⚡
+model Appointment {
+  id     String   @id @default(uuid())
+  result Result[]
 }
 
 // ⚡ ENUMS PROPERTYS ⚡
-
 enum Role {
   ASSISTANT
   ADMIN
@@ -78,4 +97,9 @@ enum Specialty {
 enum Status {
   INACTIVE
   ACTIVE
+}
+
+enum Progress {
+  INCOMPLETE
+  COMPLETE
 }
