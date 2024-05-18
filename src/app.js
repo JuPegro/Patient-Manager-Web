@@ -11,6 +11,7 @@ const userRoutes = require("./routes/user.routes");
 const testRoutes = require("./routes/test.routes");
 const doctorRoutes = require("./routes/doctor.routes");
 const patientRoutes = require("./routes/patient.routes");
+const resultLabRoutes = require("./routes/result.routes");
 
 // ⚡ SERVER READ FILES JSON ⚡
 app.use(express.json());
@@ -24,5 +25,6 @@ app.use(userRoutes);
 app.use(testRoutes);
 app.use(doctorRoutes);
 app.use(patientRoutes);
+app.use(resultLabRoutes);
 
 module.exports = app;

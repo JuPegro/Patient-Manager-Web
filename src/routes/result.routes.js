@@ -7,9 +7,9 @@ const authController = require('../controller/authController');
 //IMPORT CONTROLLER [RESULT]
 const resultControllerController = require('../controller/resultController');
 
-/*router.get('/tests', authController.verifyToken, resultControllerController.getAllTets); // GET ALL RESULT
+router.get('/results', authController.verifyToken, resultControllerController.getAllResultLab); // GET ALL RESULT
 
-router.post('/tests', authController.verifyToken, resultControllerController.createTest); // CREATE A RESULT
+/*router.post('/tests', authController.verifyToken, resultControllerController.createTest); // CREATE A RESULT
 
 router.get('/tests/:id', authController.verifyToken, resultControllerController.getTestById); // GET A RESULT BY ID
 
