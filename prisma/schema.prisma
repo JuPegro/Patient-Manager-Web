@@ -44,6 +44,7 @@ model Test {
   status    Status    @default(ACTIVE)
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
+  result    Result[]
 }
 
 // ⚡ TABLE PATIENT ⚡
@@ -72,6 +73,8 @@ model Result {
   patientId     String      @unique
   appointment   Appointment @relation(fields: [appointmentId], references: [id])
   appointmentId String      @unique
+  test          Test        @relation(fields: [testId], references: [id])
+  testId        String      @unique
   status        Progress    @default(INCOMPLETE)
   createdAt     DateTime    @default(now())
   updatedAt     DateTime?   @updatedAt
