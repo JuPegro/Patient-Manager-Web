@@ -70,11 +70,11 @@ model Result {
   id            String      @id @default(uuid())
   diagnostic    String?
   patient       Patient     @relation(fields: [patientId], references: [id])
-  patientId     String      @unique
+  patientId     String      
   appointment   Appointment @relation(fields: [appointmentId], references: [id])
-  appointmentId String      @unique
+  appointmentId String      
   test          Test        @relation(fields: [testId], references: [id])
-  testId        String      @unique
+  testId        String      
   status        Progress    @default(INCOMPLETE)
   createdAt     DateTime    @default(now())
   updatedAt     DateTime?   @updatedAt

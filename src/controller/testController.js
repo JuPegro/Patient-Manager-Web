@@ -46,7 +46,7 @@ exports.createTest = async (req, res, next) => {
 
     return res
       .status(200)
-      .json({ message: "Successfully Created Doctor", test });
+      .json({ message: "Successfully Created Test", test });
   } catch (err) {
     console.log({ error: "Error created Tests:", err });
     return res.status(500).json({ error: "Internal server error" });

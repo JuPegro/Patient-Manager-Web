@@ -9,9 +9,9 @@ const resultControllerController = require('../controller/resultController');
 
 router.get('/results', authController.verifyToken, resultControllerController.getAllResultLab); // GET ALL RESULT
 
-/*router.post('/tests', authController.verifyToken, resultControllerController.createTest); // CREATE A RESULT
+router.post('/results', authController.verifyToken, resultControllerController.createNewResults); // CREATE A RESULT
 
-router.get('/tests/:id', authController.verifyToken, resultControllerController.getTestById); // GET A RESULT BY ID
+/*router.get('/tests/:id', authController.verifyToken, resultControllerController.getTestById); // GET A RESULT BY ID
 
 router.put('/tests/:id', authController.verifyToken, resultControllerController.UpdateTest); // UPDATE A RESULT
 
