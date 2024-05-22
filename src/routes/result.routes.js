@@ -11,9 +11,10 @@ router.get('/results', authController.verifyToken, resultControllerController.ge
 
 router.post('/results', authController.verifyToken, resultControllerController.createNewResults); // CREATE A RESULT
 
+router.put('/results/:id', authController.verifyToken, resultControllerController.UpdateResultLab); // UPDATE A RESULT
+
 /*router.get('/tests/:id', authController.verifyToken, resultControllerController.getTestById); // GET A RESULT BY ID
 
-router.put('/tests/:id', authController.verifyToken, resultControllerController.UpdateTest); // UPDATE A RESULT
 
 router.delete('/tests/:id', authController.verifyToken, resultControllerController.deleteTest); // DELETE A RESULT*/
 

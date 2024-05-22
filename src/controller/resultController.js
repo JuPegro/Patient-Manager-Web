@@ -74,3 +74,33 @@ exports.createNewResults = async (req, res, next) => {
     return res.status(500).json({ error: "Internal server error" });
   }
 };
+
+
+// MIDDLEWARE UPDATE LAB TEST
+exports.UpdateResultLab = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { diagnostic } = req.body;
+
+    if (!id) {
+      return res.status(401).json({ message: "Id not provided!" });
+    }
+
+    if (!diagnostic) {
+      return res.status(401).json({ message: "Empty Fields" });
+    }
+
+    const resultLab = await prisma.result.update({
+      where: { id },
+      data: {
+        diagnostic,
+        status: "COMPLETE"
+      },
+    });
+
+    return res.status(200).json({ message: "Update result successfully", resultLab });
+  } catch (err) {
+    console.log({ error: "Error fetching Result Lab:", err });
+    return res.status(500).json({ error: "Internal server error" });
+  }
+};
