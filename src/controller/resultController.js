@@ -24,57 +24,65 @@ exports.createNewResults = async (req, res, next) => {
   try {
     const { patientId, appointmentId, testIds } = req.body;
 
-
     // IF INPUT EMPTY
-    if (!patientId || !appointmentId || !Array.isArray(testIds) || testIds.length === 0) {
+    if (
+      !patientId ||
+      !appointmentId ||
+      !Array.isArray(testIds) ||
+      testIds.length === 0
+    ) {
       return res.status(401).json({ message: "Empty Fields" });
     }
 
-    const resultData = testIds.map(testId => ({
+    const resultData = testIds.map((testId) => ({
       patientId: patientId,
       appointmentId: appointmentId,
-      testId: testId
+      testId: testId,
     }));
 
     // FOUND AN EXISTING FOREING KEYS
-    const patientExists = await prisma.patient.findUnique({where: {id: patientId}});
+    const patientExists = await prisma.patient.findUnique({
+      where: { id: patientId },
+    });
 
     // FOUND AN EXISTING FOREING KEYS
-    const appointmentExists = await prisma.appointment.findUnique({where: {id: appointmentId}});
+    const appointmentExists = await prisma.appointment.findUnique({
+      where: { id: appointmentId },
+    });
 
     //IF NOT FOUND FOREING KEY
     if (!patientExists) {
-      return res.status(402).json({message: "Patient ID does not exist"})
+      return res.status(402).json({ message: "Patient ID does not exist" });
     }
     if (!appointmentExists) {
-      return res.status(402).json({message: "Appointment ID does not exist"})
+      return res.status(402).json({ message: "Appointment ID does not exist" });
     }
 
     // VALIDATE THAT ALL TEST IDS EXIST
-    testIds.forEach(async(testId) => {
-
-      const testExists = await prisma.test.findFirst({where: {id: testId}});
+    testIds.forEach(async (testId) => {
+      const testExists = await prisma.test.findFirst({ where: { id: testId } });
 
       if (!testExists) {
-        console.log(testId)
-        return res.status(402).json({message: "Test ID does not exist", invalid: testId})
+        console.log(testId);
+        return res
+          .status(402)
+          .json({ message: "Test ID does not exist", invalid: testId });
       }
     });
 
     const resultLabs = await prisma.result.createMany({
       data: resultData,
-      skipDuplicates: true //SKIP DUPLICATES
-    })
+      skipDuplicates: true, //SKIP DUPLICATES
+    });
 
-    return res.status(200).json({message: "result Lab created", resultLabs, data: resultData});
-
-
+    return res
+      .status(200)
+      .json({ message: "result Lab created", resultLabs, data: resultData });
   } catch (err) {
     console.log({ error: "Error creating Results Lab:", err });
     return res.status(500).json({ error: "Internal server error" });
   }
 };
-
 
 // MIDDLEWARE UPDATE LAB TEST
 exports.UpdateResultLab = async (req, res, next) => {
@@ -94,13 +102,39 @@ exports.UpdateResultLab = async (req, res, next) => {
       where: { id },
       data: {
         diagnostic,
-        status: "COMPLETE"
+        status: "COMPLETE",
       },
     });
 
-    return res.status(200).json({ message: "Update result successfully", resultLab });
+    return res
+      .status(200)
+      .json({ message: "Update result successfully", resultLab });
   } catch (err) {
     console.log({ error: "Error fetching Result Lab:", err });
+    return res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+// MIDDLEWARE DELETE A RESULT LAB
+exports.deleteResultLab = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    if (!id) {
+      return res.status(401).json({ message: "Id not provided!" });
+    }
+
+    const resultLab = await prisma.result.delete({ where: { id } });
+
+    if (!resultLab) {
+      return res.status(404).json({ message: "Test not Found!!" });
+    }
+
+    return res
+      .status(200)
+      .json({ message: "Result Lab deleted successfully", resultLab });
+  } catch (err) {
+    console.log({ error: "Error deleted Result Lab:", err });
     return res.status(500).json({ error: "Internal server error" });
   }
 };

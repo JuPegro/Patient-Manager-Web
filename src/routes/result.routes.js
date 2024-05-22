@@ -13,10 +13,7 @@ router.post('/results', authController.verifyToken, resultControllerController.c
 
 router.put('/results/:id', authController.verifyToken, resultControllerController.UpdateResultLab); // UPDATE A RESULT
 
-/*router.get('/tests/:id', authController.verifyToken, resultControllerController.getTestById); // GET A RESULT BY ID
-
-
-router.delete('/tests/:id', authController.verifyToken, resultControllerController.deleteTest); // DELETE A RESULT*/
+router.delete('/results/:id', authController.verifyToken, resultControllerController.deleteResultLab); // DELETE A RESULT
 
 
 module.exports = router;
