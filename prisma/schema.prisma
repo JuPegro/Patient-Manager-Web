@@ -35,6 +35,7 @@ model Doctor {
   status    Status    @default(ACTIVE)
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
+  appointment Appointment[]
 }
 
 // ⚡ TABLE TEST ⚡
@@ -49,20 +50,21 @@ model Test {
 
 // ⚡ TABLE PATIENT ⚡
 model Patient {
-  id        String    @id @default(uuid())
-  name      String
-  lastname  String
-  phone     String    @unique
-  address   String
-  card      String    @unique
-  birthday  String
-  picture   String
-  smoke     Boolean
-  allergies Boolean
-  status    Status    @default(ACTIVE)
-  createdAt DateTime  @default(now())
-  updatedAt DateTime? @updatedAt
-  result    Result[]
+  id          String        @id @default(uuid())
+  name        String
+  lastname    String
+  phone       String        @unique
+  address     String
+  card        String        @unique
+  birthday    String
+  picture     String
+  smoke       Boolean
+  allergies   Boolean
+  status      Status        @default(ACTIVE)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime?     @updatedAt
+  result      Result[]
+  appointment Appointment[]
 }
 
 // ⚡ TABLE RESULT ⚡
@@ -70,26 +72,34 @@ model Result {
   id            String      @id @default(uuid())
   diagnostic    String?
   patient       Patient     @relation(fields: [patientId], references: [id])
-  patientId     String      
+  patientId     String
   appointment   Appointment @relation(fields: [appointmentId], references: [id])
-  appointmentId String      
+  appointmentId String
   test          Test        @relation(fields: [testId], references: [id])
-  testId        String      
-  status        Progress    @default(INCOMPLETE)
+  testId        String
+  status        Status    @default(INCOMPLETE)
   createdAt     DateTime    @default(now())
   updatedAt     DateTime?   @updatedAt
 }
 
 // ⚡ TABLE APPOINTMENT ⚡
 model Appointment {
-  id     String   @id @default(uuid())
-  result Result[]
+  id        String   @id @default(uuid())
+  patient   Patient  @relation(fields: [patientId], references: [id])
+  patientId String
+  doctor    Doctor   @relation(fields: [doctorId], references: [id])
+  doctorId  String 
+  date      String
+  hour      String
+  reason    String
+  status    Progress   @default(CONSULTATION)
+  result    Result[]
 }
 
 // ⚡ ENUMS PROPERTYS ⚡
 enum Role {
-  ASSISTANT
   ADMIN
+  ASSISTANT
 }
 
 enum Specialty {
@@ -98,11 +108,14 @@ enum Specialty {
 }
 
 enum Status {
-  INACTIVE
   ACTIVE
+  INACTIVE
+  COMPLETE
+  INCOMPLETE
 }
 
 enum Progress {
-  INCOMPLETE
+  RESULTS
   COMPLETE
+  CONSULTATION
 }
