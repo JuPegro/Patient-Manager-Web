@@ -124,7 +124,36 @@ exports.updateAppointment = async (req, res, next) => {
       },
     });
 
-    return res.status(200).json({message: "Succefully update appointment", appointment});
+    return res
+      .status(200)
+      .json({ message: "Succefully update appointment", appointment });
+  } catch (err) {
+    console.log({ message: "Error fetching Appointment" });
+    return res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+// MIDDLEWARE DELETE AN APPOINTMETN
+exports.deleteAppointment = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    // IF ID NOT PROVIDED
+    if (!id) {
+      return res.status(403).json({ message: "Id not provided" });
+    }
+
+    // DELETE APPOINTMENT WITH PRISMA...
+    const appointment = await prisma.appointment.delete({
+      where: {id}
+    })
+
+    // IF NOT FOUND APPOINTMENT
+    if (!appointment) {
+      return res.status(404).json({ message: "Appointment not Found!!" });
+    }
+
+    return res.status(200).json({message: "Succefully deleted appointment", appointment})
   } catch (err) {
     console.log({ message: "Error fetching Appointment" });
     return res.status(500).json({ error: "Internal server error" });

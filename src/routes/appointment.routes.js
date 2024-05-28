@@ -13,6 +13,8 @@ router.post('/appointments', authController.verifyToken, appointmentController.c
 
 router.get('/appointments/:id', authController.verifyToken, appointmentController.getByIdAppointment); //GET BY ID AN APPOINTMENT
 
-router.put('/appointments/:id', authController.verifyToken, appointmentController.updateAppointment); //GET BY ID AN APPOINTMENT
+router.put('/appointments/:id', authController.verifyToken, appointmentController.updateAppointment); //UPDATE AN APPOINTMENT
+
+router.delete('/appointments/:id', authController.verifyToken, appointmentController.deleteAppointment); //UPDATE AN APPOINTMENT
 
 module.exports = router;
