@@ -26,6 +26,44 @@ exports.getAllAppointments = async (req, res, next) => {
 exports.createAppointment = async (req, res, next) => {
   try {
     const { patientId, doctorId, date, hour, reason } = req.body;
+
+    //IF FIELDS EMPTY
+    if (!patientId || !doctorId || !date || !hour || !reason) {
+      return res.status(401).json({ message: "Empty Fields" });
+    }
+
+    // FOUND AN EXISTING FOREING KEYS
+    const patientExists = await prisma.patient.findUnique({
+      where: { id: patientId },
+    });
+
+    // FOUND AN EXISTING FOREING KEYS
+    const doctorExists = await prisma.doctor.findUnique({
+      where: { id: doctorId },
+    });
+
+    //IF NOT FOUND FOREING KEY
+    if (!patientExists) {
+      return res.status(402).json({ message: "Patient ID does not exist" });
+    }
+    if (!doctorExists) {
+      return res.status(402).json({ message: "Doctor ID does not exist" });
+    }
+
+    // CREATE APPOINTMENT
+    const appointment = await prisma.appointment.create({
+      data: {
+        patientId: patientId,
+        doctorId: doctorId,
+        date: date,
+        hour: hour,
+        reason: reason
+      }
+    })
+
+    return res.status(200).json({message: "Appointment Succefully created", appointment});
+
+
   } catch (err) {
     console.log({ error: "Error fetching Appointments", err });
     return res.status(500).json({ error: "Internal error server", err });
