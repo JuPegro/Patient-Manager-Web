@@ -24,17 +24,17 @@ model User {
 
 // ⚡ TABLE DOCTORS ⚡
 model Doctor {
-  id        String    @id @default(uuid())
-  name      String
-  lastname  String
-  email     String    @unique
-  phone     String    @unique
-  card      String    @unique
-  picture   String?
-  specialty Specialty @default(GENERAL)
-  status    Status    @default(ACTIVE)
-  createdAt DateTime  @default(now())
-  updatedAt DateTime? @updatedAt
+  id          String        @id @default(uuid())
+  name        String
+  lastname    String
+  email       String        @unique
+  phone       String        @unique
+  card        String        @unique
+  picture     String?
+  specialty   Specialty     @default(GENERAL)
+  status      Status        @default(ACTIVE)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime?     @updatedAt
   appointment Appointment[]
 }
 
@@ -77,22 +77,24 @@ model Result {
   appointmentId String
   test          Test        @relation(fields: [testId], references: [id])
   testId        String
-  status        Status    @default(INCOMPLETE)
+  status        Status      @default(INCOMPLETE)
   createdAt     DateTime    @default(now())
   updatedAt     DateTime?   @updatedAt
 }
 
 // ⚡ TABLE APPOINTMENT ⚡
 model Appointment {
-  id        String   @id @default(uuid())
-  patient   Patient  @relation(fields: [patientId], references: [id])
+  id        String    @id @default(uuid())
+  patient   Patient   @relation(fields: [patientId], references: [id])
   patientId String
-  doctor    Doctor   @relation(fields: [doctorId], references: [id])
-  doctorId  String 
+  doctor    Doctor    @relation(fields: [doctorId], references: [id])
+  doctorId  String
   date      String
   hour      String
   reason    String
-  status    Progress   @default(CONSULTATION)
+  status    Status    @default(CONSULTATION)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
   result    Result[]
 }
 
@@ -112,10 +114,6 @@ enum Status {
   INACTIVE
   COMPLETE
   INCOMPLETE
-}
-
-enum Progress {
   RESULTS
-  COMPLETE
   CONSULTATION
 }

@@ -21,3 +21,13 @@ exports.getAllAppointments = async (req, res, next) => {
     return res.status(500).json({ error: "Internal error server", err });
   }
 };
+
+//MIDDLEWARE CREATE AN APPOINTMENT APPOINTMENTS
+exports.createAppointment = async (req, res, next) => {
+  try {
+    const { patientId, doctorId, date, hour, reason } = req.body;
+  } catch (err) {
+    console.log({ error: "Error fetching Appointments", err });
+    return res.status(500).json({ error: "Internal error server", err });
+  }
+};
