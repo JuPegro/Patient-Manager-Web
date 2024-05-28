@@ -11,4 +11,6 @@ router.get('/appointments', authController.verifyToken, appointmentController.ge
 
 router.post('/appointments', authController.verifyToken, appointmentController.createAppointment); //CREATE AN APPOINTMENT
 
+router.get('/appointments/:id', authController.verifyToken, appointmentController.getByIdAppointment); //GET BY ID AN APPOINTMENT
+
 module.exports = router;

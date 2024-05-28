@@ -57,15 +57,39 @@ exports.createAppointment = async (req, res, next) => {
         doctorId: doctorId,
         date: date,
         hour: hour,
-        reason: reason
-      }
-    })
+        reason: reason,
+      },
+    });
 
-    return res.status(200).json({message: "Appointment Succefully created", appointment});
-
-
+    return res
+      .status(200)
+      .json({ message: "Succefully appointment created", appointment });
   } catch (err) {
     console.log({ error: "Error fetching Appointments", err });
     return res.status(500).json({ error: "Internal error server", err });
+  }
+};
+
+//MIDDLEWARE GET AN APPOINTMENT
+exports.getByIdAppointment = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    if (!id) {
+      return res.status(403).json({ message: "Id not provided" });
+    }
+
+    const appointment = await prisma.appointment.findFirst({ where: { id } });
+
+    if (!appointment) {
+      return res.status(404).json({ message: "Appointment not Found" });
+    }
+
+    return res
+      .status(200)
+      .json({ message: "Appointment found successfully", appointment });
+  } catch (err) {
+    console.log({ message: "Error fetching Appointment" });
+    return res.status(500).json({ error: "Internal server error" });
   }
 };
