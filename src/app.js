@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 const dotenv = require("dotenv");
+const morgan = require('morgan');
+const cors = require('cors');
 
 // ⚡ SEE THE ENVIROMENT VARIABLES ⚡
 dotenv.config();
@@ -19,6 +21,12 @@ app.use(express.json());
 
 // ⚡ SERVER READ DATA FROM FORMS ⚡
 app.use(express.urlencoded({ extended: true }));
+
+// ⚡SET CORS⚡
+app.use(cors());
+
+// ⚡SET MORGAN⚡
+app.use(morgan("dev"));
 
 // ⚡ SET ROUTES ⚡
 app.use("/auth", authRoutes);
