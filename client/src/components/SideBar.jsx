@@ -3,7 +3,7 @@ import React from "react";
 import Logo from "../images/logo.png";
 import { NavLink } from "react-router-dom";
 import { Divider, List } from "@mui/material";
-import {links, tools} from './Navigation'
+import { links, tools } from "./Navigation";
 
 export const SideBar = () => {
   return (
@@ -11,7 +11,6 @@ export const SideBar = () => {
       <img className="__logo" src={Logo} alt="Logo" />
       <List
         sx={{
-          width: "100%",
           display: "flex",
           flexDirection: "column",
           gap: 2,
@@ -32,6 +31,7 @@ export const SideBar = () => {
           </NavLink>
         ))}
       </List>
+      <Divider />
       <List
         sx={{
           width: "100%",
@@ -43,7 +43,6 @@ export const SideBar = () => {
           bottom: "2rem",
         }}
       >
-        <Divider />
         {tools.map((info, index) => (
           <NavLink
             key={index}
