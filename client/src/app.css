@@ -8,22 +8,24 @@
 /* SIDEBAR.JSX STYLES */
 
 .__container {
-  width: 30%;
+  width: 20%;
   height: 100vh;
+  position: relative;
+  background-color: #fbfbfb;
 }
 
 .__logo {
-  width: 100%;
+  width: 80%;
   margin: 1rem;
 }
 
 .__link {
-  gap: 1.5rem;
+  gap: 1rem;
   display: flex;
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: 500;
   color: #014e60;
-  padding: 0.7rem 0;
+  padding: 0.6rem 0;
   align-items: center;
   text-decoration: none;
   transition: all 0.5s ease-out;
@@ -32,6 +34,7 @@
 .__active {
   z-index: 10;
   gap: 1.5rem;
+  font-size: 0.8rem;
   display: flex;
   font-weight: 500;
   color: #019b98;
@@ -84,11 +87,13 @@
 
 .__link:hover {
   margin-left: 1.5rem;
+  color: #019b98;
 }
 
 .__active:hover {
   margin-left: 1rem;
 }
+
 
 /* SIDEBAR.JSX ANIMATIONS*/
 
