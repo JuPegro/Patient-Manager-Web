@@ -4,6 +4,7 @@ import { SideBar } from "./components/SideBar";
 import { NavBar } from "./components/NavBar";
 import "./app.css";
 import { Box } from "@mui/material";
+import { DashboardPage } from "./pages/DashboardPage";
 
 const App = () => {
   return (
@@ -13,7 +14,7 @@ const App = () => {
         <Box id="__root" sx={{ padding: 0 }}>
           <NavBar />
           <Routes>
-            <Route path="/" element={<h1>Aun Nada</h1>} />
+            <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/auth/signup" element={<h2>Nada</h2>} />
           </Routes>
         </Box>

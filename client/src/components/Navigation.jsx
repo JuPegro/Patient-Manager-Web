@@ -21,7 +21,7 @@ import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined
 export const links = [
   {
     name: "Dashboard",
-    path: "/",
+    path: "/dashboard",
     icon: <DashboardOutlinedIcon fontSize="small" />,
     activeIcon: <DashboardIcon fontSize="small" />,
   },
