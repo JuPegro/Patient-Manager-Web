@@ -27,7 +27,7 @@ export const links = [
   },
   {
     name: "Users",
-    path: "/ajakaks",
+    path: "/users",
     icon: <GroupOutlinedIcon fontSize="small" />,
     activeIcon: <GroupIcon fontSize="small" />,
   },
