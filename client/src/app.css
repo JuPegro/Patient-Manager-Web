@@ -157,3 +157,7 @@
   color: var(--text-200);
   font-weight: 500;
 }
+
+.__select {
+  font-style: normal;
+}
