@@ -3,13 +3,12 @@ import "../app.css";
 import {
   Box,
   Typography,
-  Tab,
-  Tabs,
   Button,
   Select,
-  MenuItem,
+  MenuItem
 } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
+import DataTable from '../components/DataTable'
 import SellOutlinedIcon from "@mui/icons-material/SellOutlined";
 import InputLabel from "@mui/material/InputLabel";
 import AddIcon from "@mui/icons-material/Add";
@@ -177,19 +176,7 @@ export const UserPage = () => {
           </Box>
         </Box>
       </Box>
-      <Box
-        sx={{
-          borderBottom: 1,
-          borderColor: "#019b98",
-          margin: "1rem 0 0 2rem",
-        }}
-      >
-        <Tabs aria-label="basic tabs example">
-          <Tab label="Item One" />
-          <Tab label="Item Two" />
-          <Tab label="Item Three" />
-        </Tabs>
-      </Box>
+      <DataTable/>
     </Box>
   );
 };
